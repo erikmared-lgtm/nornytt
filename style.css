@@ -61,6 +61,9 @@ nav a[aria-current]{background:var(--accent-tint);color:var(--accent-ink);font-w
 
 /* Chips: ljus tonad fyllning i stället för tjock ram */
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 14px}
+/* Förstasidan: centrera intro (rubrik, ingress, chips, dagens ämne) i innehållsbredden. */
+body.home .intro{margin-inline:auto;text-align:center}
+body.home .intro .chips{justify-content:center}
 .chip{background:var(--accent-tint);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent-ink);padding:7px 16px 7px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;display:inline-flex;align-items:center;gap:8px}
 .chip::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
 .chip:hover{background:var(--paper)}
