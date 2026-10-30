@@ -1,24 +1,125 @@
-:root{--ink:#22303c;--navy:#1f3a4d;--sol:#E9A800;--brunn:#2A7DB8;--varm:#C8553D;--bg:#F6F5F1;--muted:#5d6b77}
-*{box-sizing:border-box}body{margin:0;font:17px/1.65 system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
-.wrap{max-width:1000px;margin:auto;padding:0 20px}a{color:var(--navy)}
-header{background:var(--navy);position:sticky;top:0;z-index:9}.hd{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:60px;gap:8px}
-.logo{color:#fff;font-weight:800;font-size:1.25rem;text-decoration:none;display:flex;gap:10px;align-items:center}
-.dot{width:20px;height:20px;border-radius:50%;background:conic-gradient(var(--sol) 0 33%,var(--brunn) 0 66%,var(--varm) 0)}
-nav{display:flex;gap:4px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;padding:8px 10px;font-size:.95rem;border-radius:6px}nav a:hover{background:#ffffff22}
-.intro{padding:48px 0 8px}.intro h1{font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.2;margin:0 0 10px;color:var(--navy)}
-h2{color:var(--navy);margin-top:40px}.small{color:var(--muted);font-size:.9rem}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.chip{background:#fff;border:2px solid;padding:6px 16px;border-radius:999px;text-decoration:none;font-weight:600}
-.chip.t-solceller{border-color:var(--sol);color:#8a6400}.chip.t-egen-brunn{border-color:var(--brunn);color:var(--brunn)}.chip.t-luftvarmepump{border-color:var(--varm);color:var(--varm)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:60px}
-.card{background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:inherit;border-top:4px solid var(--navy);box-shadow:0 3px 14px #1f3a4d14;transition:transform .15s}.card:hover{transform:translateY(-2px)}
-.card h3{margin:6px 0;color:var(--navy);line-height:1.3}.card p{margin:0;font-size:.92rem;color:var(--muted)}.card small{font-weight:700;color:var(--muted)}
-.t-solceller{border-top-color:var(--sol)}.t-egen-brunn{border-top-color:var(--brunn)}.t-luftvarmepump{border-top-color:var(--varm)}
-.post{background:#fff;border-radius:14px;padding:32px clamp(18px,4vw,48px);margin:32px 0 60px;max-width:760px;box-shadow:0 3px 14px #1f3a4d14}
-.post h1{color:var(--navy);line-height:1.2;margin:4px 0 12px}.meta{color:var(--muted);font-size:.9rem;margin:0}.lead{font-size:1.15rem;color:#3a4955}
-blockquote{border-left:4px solid var(--navy);margin:16px 0;padding:4px 16px;color:var(--muted)}
-mark.ev{background:#ffe7a3;color:#6b4c00;font-size:.8em;font-weight:700;padding:1px 6px;border-radius:4px}
-.cta{margin:36px 0 16px;padding:24px;border-radius:12px;background:#f0f4f7;border-top:5px solid var(--navy)}.cta h2{margin-top:0}
-.btn{display:inline-block;background:var(--navy);color:#fff!important;font-weight:700;padding:12px 22px;border-radius:999px;text-decoration:none}
-.cta.t-solceller .btn{background:var(--sol);color:#2b2000!important}.cta.t-egen-brunn .btn{background:var(--brunn)}.cta.t-luftvarmepump .btn{background:var(--varm)}
-.ai{font-size:.82rem;color:var(--muted);border-top:1px solid #e3e3e3;padding-top:12px}
-footer{background:#1a2b38;color:#c9d3db;padding:28px 0;font-size:.9rem}footer a{color:#fff}
+/* Nornytt – tipston (Cassandra 2026-10-30, live). Drop-in. Klasser: .kicker .snabbt .mer .cta-not .om */
+/* Typsnitt: Fraunces + Source Sans 3 via Google Fonts tills självhost (Eriks ja: live först). */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+
+:root{
+  /* Bas */
+  --bg:#FAF6EE;        /* varm papperston (idag #F6F5F1) */
+  --paper:#FFFDF8;     /* kort/artikel (idag #fff) */
+  --ink:#2B2A27;       /* brödtext, varm nästan-svart (idag #22303c) */
+  --muted:#6A655C;     /* sekundärtext (idag #5d6b77) */
+  --line:#E7DFD0;      /* tunna linjer/kanter */
+  --skog:#2F4A3F;      /* ersätter --navy som profilfärg: mörk skogsgrön */
+  --navy:var(--skog);  /* bakåtkompatibelt alias */
+  /* Ämnen: accent / mörk text / ljus ton */
+  --sol:#E9B949;   --sol-ink:#7A5600;   --sol-tint:#FBF1D6;
+  --brunn:#3D7FA8; --brunn-ink:#24597A; --brunn-tint:#E3EFF6;
+  --varm:#C9714F;  --varm-ink:#9A4128;  --varm-tint:#F8E6DE;
+  --accent:var(--skog); --accent-ink:var(--skog); --accent-tint:#E9EFEA;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3","Source Sans Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:14px;
+  --shadow:0 1px 2px #2b2a270d,0 6px 20px #2b2a270f;
+}
+/* Ämnesklass sätter accent-variabler – används av kort, chips, CTA, artikel */
+.t-solceller{--accent:var(--sol);--accent-ink:var(--sol-ink);--accent-tint:var(--sol-tint)}
+.t-egen-brunn{--accent:var(--brunn);--accent-ink:var(--brunn-ink);--accent-tint:var(--brunn-tint)}
+.t-luftvarmepump{--accent:var(--varm);--accent-ink:var(--varm-ink);--accent-tint:var(--varm-tint)}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font:400 1.125rem/1.7 var(--sans);color:var(--ink);background:var(--bg);text-rendering:optimizeLegibility}
+.wrap{max-width:1040px;margin:auto;padding:0 22px}
+a{color:var(--skog);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--sol);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--skog);letter-spacing:-.01em;line-height:1.2;font-optical-sizing:auto}
+h2{font-size:1.6rem;margin:2.2em 0 .5em}
+h3{font-size:1.25rem}
+.small{color:var(--muted);font-size:.95rem}
+
+/* Header: ljus, tunn linje i stället för navy-block */
+header{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);position:sticky;top:0;z-index:9;border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:64px;gap:8px 16px}
+.logo{color:var(--skog);font-family:var(--serif);font-weight:600;font-size:1.45rem;text-decoration:none;display:flex;gap:10px;align-items:center;letter-spacing:-.01em}
+.logo small{font-family:var(--sans);font-weight:400;font-size:.85rem;color:var(--muted);letter-spacing:0;margin-left:2px}
+/* Treämnes-dot: samma idé, mjukare färger + ljus mittpunkt (som en sol/brunnslock) */
+.dot{width:22px;height:22px;border-radius:50%;flex:none;
+  background:radial-gradient(circle,var(--paper) 0 26%,transparent 27%),conic-gradient(from -30deg,var(--sol) 0 33.3%,var(--brunn) 0 66.6%,var(--varm) 0);
+  box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--line)}
+nav{display:flex;gap:2px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;padding:7px 12px;font-size:1rem;border-radius:999px}
+nav a:hover{background:#2f4a3f12}
+nav a[aria-current]{background:var(--accent-tint);color:var(--accent-ink);font-weight:600}
+
+/* Intro / hero: personlig ingress, smalare textbredd */
+.intro{padding:56px 0 12px;max-width:720px}
+.kicker{font:600 .85rem/1.2 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 10px}
+.intro h1{font-size:clamp(2rem,5vw,3rem);line-height:1.12;margin:0 0 14px}
+.intro p{font-size:1.2rem;color:#4a463f;margin:0 0 8px}
+
+/* Chips: ljus tonad fyllning i stället för tjock ram */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 14px}
+.chip{background:var(--accent-tint);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent-ink);padding:7px 16px 7px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;display:inline-flex;align-items:center;gap:8px}
+.chip::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.chip:hover{background:var(--paper)}
+
+/* "Kort svar" – AI-vänlig sammanfattning högt upp (valfri) */
+.snabbt{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--r);padding:16px 20px;margin:20px 0 8px}
+.snabbt h2,.post .snabbt h2{font-size:1.05rem;font-family:var(--sans);font-weight:700;margin:0 0 6px;color:var(--accent-ink);letter-spacing:0}
+.snabbt ul{margin:0;padding-left:1.2em}.snabbt li{margin:2px 0}
+
+/* Kortgrid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin:8px 0 72px}
+.card{position:relative;background:var(--paper);border-radius:var(--r);padding:22px 22px 20px;text-decoration:none;color:inherit;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--accent)}
+.card:hover{transform:translateY(-2px);box-shadow:0 2px 4px #2b2a2712,0 12px 28px #2b2a2714}
+.card small{font-weight:600;font-size:.85rem;color:var(--accent-ink);text-transform:uppercase;letter-spacing:.06em}
+.card h3{margin:2px 0 4px;color:var(--skog);font-size:1.3rem;line-height:1.25}
+.card p{margin:0;font-size:1rem;color:var(--muted);line-height:1.6}
+.card .mer{margin-top:auto;padding-top:10px;font-weight:600;color:var(--accent-ink);font-size:.98rem}
+/* bakåtkompatibelt: gamla border-top-regler behövs inte längre */
+.card.t-solceller,.card.t-egen-brunn,.card.t-luftvarmepump{border-top:1px solid var(--line)}
+
+/* Artikel */
+.post{background:var(--paper);border-radius:18px;padding:40px clamp(20px,5vw,64px) 36px;margin:36px auto 72px;max-width:780px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.post h1{font-size:clamp(1.9rem,4.5vw,2.6rem);line-height:1.15;margin:8px 0 14px}
+.post h2{font-size:1.5rem}
+.post p,.post li{max-width:66ch}
+.post li{margin:6px 0}
+.post li::marker{color:var(--accent-ink);font-weight:700}
+.meta{color:var(--muted);font-size:.95rem;margin:0}
+.meta a{color:var(--accent-ink);font-weight:600;text-decoration:none;background:var(--accent-tint);padding:2px 10px;border-radius:999px}
+.lead{font-size:1.28rem;line-height:1.55;color:#45413a;font-family:var(--sans)}
+blockquote{border-left:3px solid var(--accent);margin:20px 0;padding:6px 18px;color:#4a463f;font-style:italic;background:var(--accent-tint);border-radius:0 10px 10px 0}
+mark.ev{background:var(--sol-tint);color:var(--sol-ink);font-size:.8em;font-weight:700;padding:1px 7px;border-radius:5px}
+/* Källor: mindre och dämpade, men tydligt listade */
+.post>h2+ul:last-of-type{font-size:.95rem;color:var(--muted);word-break:break-word}
+
+/* CTA: en tipsruta ("Tips: jämför några offerter"), inte en annonsbanner */
+.cta{margin:44px 0 12px;padding:24px 26px;border-radius:var(--r);background:var(--accent-tint);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.cta h2{margin:0 0 6px;font-size:1.3rem;color:var(--accent-ink)}
+.cta p{margin:0 0 14px;color:#45413a}
+.btn{display:inline-block;background:var(--paper);color:var(--accent-ink)!important;border:1.5px solid var(--accent-ink);font-weight:600;padding:10px 20px;border-radius:999px;text-decoration:none;transition:background .15s,color .15s}
+.btn:hover{background:var(--accent-ink);color:#fff!important}
+.cta-not{display:block;margin-top:12px;font-size:.85rem;color:var(--muted)}
+/* gamla ämnesregler för .btn neutraliseras (accent styrs via variabler) */
+.cta.t-solceller .btn,.cta.t-egen-brunn .btn,.cta.t-luftvarmepump .btn{background:var(--paper)}
+.cta.t-solceller .btn:hover,.cta.t-egen-brunn .btn:hover,.cta.t-luftvarmepump .btn:hover{background:var(--accent-ink)}
+
+.ai{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+
+/* Footer: mörk skogsgrön, med kort "om oss"-text */
+footer{background:var(--skog);color:#E7DFD0;padding:40px 0 34px;font-size:.98rem}
+footer a{color:#fff}
+footer .om{font-family:var(--serif);font-size:1.15rem;color:#fff;max-width:640px;margin:0 0 10px}
+
+@media (max-width:560px){
+  body{font-size:1.06rem}
+  .intro{padding-top:36px}
+  .post{padding:28px 18px;border-radius:0;margin:0 -22px 48px;border-left:0;border-right:0}
+  nav a{padding:6px 9px;font-size:.95rem}
+  .hd{padding-top:6px;padding-bottom:6px}
+}
+@media (prefers-reduced-motion:reduce){.card,.btn{transition:none}.card:hover{transform:none}}
